@@ -96,32 +96,32 @@ export default function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-12 items-start lg:items-center">
           <div className="lg:col-span-5 flex flex-col space-y-2 relative z-10">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`text-left px-6 py-6 rounded-[2rem] transition-all duration-300 ${
+                className={`text-left px-4 sm:px-6 py-4 sm:py-6 rounded-[2rem] transition-all duration-300 ${
                   activeTab === tab.id
                     ? "bg-white/10 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] ring-1 ring-white/20"
                     : "hover:bg-white/5"
                 }`}
               >
-                <h3 className={`text-[1.1rem] font-semibold mb-2 ${activeTab === tab.id ? "text-white" : "text-blue-100"}`}>
+                <h3 className={`text-base sm:text-[1.1rem] font-semibold mb-2 ${activeTab === tab.id ? "text-white" : "text-blue-100"}`}>
                   {tab.title}
                 </h3>
-                <p className={`text-[0.95rem] leading-relaxed ${activeTab === tab.id ? "text-white/80" : "text-blue-200/60"}`}>
+                <p className={`text-[0.9rem] sm:text-[0.95rem] leading-relaxed ${activeTab === tab.id ? "text-white/80" : "text-blue-200/60"}`}>
                   {tab.desc}
                 </p>
               </button>
             ))}
           </div>
 
-          <div className="lg:col-span-7 relative z-0 mt-12 lg:mt-0 lg:-mr-48 xl:-mr-64">
-            <div className="w-[800px] lg:w-[950px] p-2 bg-slate-200/40 rounded-[1.25rem] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] border border-white/20 backdrop-blur-sm">
-              <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-100 flex flex-col h-[520px]">
+          <div className="lg:col-span-7 relative z-0 mt-12 lg:mt-0 lg:-mr-48 xl:-mr-64 flex justify-center lg:justify-start">
+            <div className="w-full sm:w-[450px] md:w-[550px] lg:w-[800px] xl:w-[950px] p-2 sm:p-2 bg-slate-200/40 rounded-[1.25rem] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] border border-white/20 backdrop-blur-sm overflow-hidden">
+              <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-100 flex flex-col h-auto md:h-[520px]">
                 <div className="bg-slate-50/80 px-4 py-3 border-b border-slate-100 flex items-center gap-2">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-slate-300" />
@@ -133,15 +133,15 @@ export default function Features() {
                   </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row flex-1">
-                  <div className="w-full md:w-56 bg-white border-r border-slate-100 p-6 flex flex-col shrink-0">
-                    <div className="flex items-center gap-2 font-bold text-slate-900 mb-8">
+                <div className="flex flex-col lg:flex-row flex-1">
+                  <div className="w-full lg:w-56 bg-white border-r border-slate-100 p-4 sm:p-6 flex flex-col shrink-0">
+                    <div className="flex items-center gap-2 font-bold text-slate-900 mb-4 sm:mb-8">
                       <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
                         <div className="w-3 h-[2px] bg-white rounded-full" />
                       </div>
-                      Moksh
+                      <span className="text-sm sm:text-base">Moksh</span>
                     </div>
-                    <nav className="flex flex-col space-y-3.5 text-[0.9rem] font-medium">
+                    <nav className="flex flex-col space-y-2 sm:space-y-3.5 text-[0.8rem] sm:text-[0.9rem] font-medium">
                       {tabs.map((tab) => (
                         <button
                           key={tab.id}
@@ -158,20 +158,20 @@ export default function Features() {
                       <span className="text-slate-500">Analytics</span>
                       <span className="text-slate-500">Reports</span>
                     </nav>
-                    <div className="mt-8 md:mt-auto flex items-center gap-2 text-xs font-medium text-slate-500 pt-8 border-t border-slate-100">
+                    <div className="mt-4 sm:mt-8 lg:mt-auto flex items-center gap-2 text-xs font-medium text-slate-500 pt-4 sm:pt-8 border-t border-slate-100">
                       <div className="w-6 h-6 bg-slate-900 rounded-full flex items-center justify-center text-white text-[10px]">M</div>
-                      Moksh Communication
+                      <span className="text-[0.7rem] sm:text-xs">Moksh Communication</span>
                     </div>
                   </div>
 
-                  <div className="flex-1 bg-slate-50/50 p-6 sm:p-10 w-full overflow-y-auto">
-                    <h2 className="text-[1.35rem] font-bold text-slate-900 mb-6">{activeTab}</h2>
-                    <div className="bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden min-w-[500px]">
-                      <table className="w-full text-left text-[0.85rem]">
+                  <div className="flex-1 bg-slate-50/50 p-3 sm:p-6 sm:p-10 w-full overflow-x-auto">
+                    <h2 className="text-[1.1rem] sm:text-[1.35rem] font-bold text-slate-900 mb-4 sm:mb-6">{activeTab}</h2>
+                    <div className="bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-slate-100 overflow-x-auto min-w-[280px] sm:min-w-[500px]">
+                      <table className="w-full text-left text-[0.75rem] sm:text-[0.85rem]">
                         <thead className="bg-slate-50/80 border-b border-slate-100 text-slate-500">
                           <tr>
                             {currentData.headers.map((header) => (
-                              <th key={header} className="px-5 py-3.5 font-semibold">
+                              <th key={header} className="px-3 sm:px-5 py-2 sm:py-3.5 font-semibold text-[0.7rem] sm:text-sm">
                                 {header}
                               </th>
                             ))}
@@ -186,7 +186,7 @@ export default function Features() {
                               {row.cols.map((col, colIdx) => (
                                 <td
                                   key={colIdx}
-                                  className={`px-5 py-3.5 ${colIdx === 0 ? "flex items-center gap-3" : ""} ${row.active ? "text-slate-900 font-medium" : ""}`}
+                                  className={`px-3 sm:px-5 py-2 sm:py-3.5 ${colIdx === 0 ? "flex items-center gap-1 sm:gap-3" : ""} ${row.active ? "text-slate-900 font-medium" : ""}`}
                                 >
                                   {colIdx === 0 && row.active && (
                                     <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-blue-600" />

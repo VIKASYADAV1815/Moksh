@@ -1,8 +1,8 @@
 export default function HeroMockup() {
   return (
-    <div className="relative flex justify-center lg:justify-end items-center z-10 w-full lg:w-[450px] p-4">
+    <div className="relative flex justify-center lg:justify-end items-center z-10 w-full lg:w-[450px] p-2 sm:p-4">
       <div
-        className="relative w-[320px] h-[610px] bg-black rounded-[46px] p-2.5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border border-slate-800/50 ring-1 ring-slate-900/5 flex flex-col overflow-hidden"
+        className="relative w-[280px] sm:w-[320px] h-[540px] sm:h-[610px] bg-black rounded-[36px] sm:rounded-[46px] p-2 sm:p-2.5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border border-slate-800/50 ring-1 ring-slate-900/5 flex flex-col overflow-hidden"
         style={{
           WebkitMaskImage: "linear-gradient(to bottom, #000000 55%, transparent 92%)",
           maskImage: "linear-gradient(to bottom, #000000 55%, transparent 92%)",
