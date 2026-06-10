@@ -1,4 +1,57 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const TypewriterText = ({ words }: { words: string[] }) => {
+  const [displayedWord, setDisplayedWord] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[displayedWord];
+    const speed = isDeleting ? 30 : 60;
+
+    const timer = setTimeout(() => {
+      if (isDeleting) {
+        setDisplayedText(current.substring(0, displayedText.length - 1));
+        if (displayedText === "") {
+          setIsDeleting(false);
+          setDisplayedWord((prev) => (prev + 1) % words.length);
+        }
+      } else {
+        setDisplayedText(current.substring(0, displayedText.length + 1));
+        if (displayedText === current) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      }
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, displayedWord, words]);
+
+  return (
+    <span>
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+        className="text-blue-600"
+      >
+        |
+      </motion.span>
+    </span>
+  );
+};
+
 export default function HeroMockup() {
+  const typewriterWords = [
+    "Grow Your Business",
+    "Maximize Your ROI",
+    "Boost Your Sales",
+    "Scale Your Brand",
+  ];
+
   return (
     <div className="relative flex justify-center lg:justify-end items-center z-10 w-full lg:w-[450px] p-2 sm:p-4">
       <div
@@ -38,62 +91,72 @@ export default function HeroMockup() {
           </div>
 
           <div className="flex-1 px-3 sm:px-4 pt-1.5 sm:pt-2 flex flex-col pb-4 sm:pb-6 overflow-hidden">
-            <div className="text-center mb-2 sm:mb-4">
-              <p className="text-[7px] sm:text-[10px] font-semibold text-blue-600 uppercase tracking-wide">Dashboard</p>
-              <h2 className="text-xs sm:text-lg font-bold text-neutral-900 mt-0.5 sm:mt-1 leading-tight">
-                SEO &amp; Ads<br />
-                <span className="text-blue-600">Performance</span>
+            <div className="text-center mb-2 sm:mb-3">
+              <p className="text-[7px] sm:text-[9px] font-semibold text-blue-600 uppercase tracking-wide">Smart Dashboard</p>
+              <h2 className="text-[9px] sm:text-sm font-bold text-neutral-900 mt-0.5 sm:mt-1 leading-tight h-5 sm:h-6 flex items-center justify-center">
+                <TypewriterText words={typewriterWords} />
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-2 sm:mb-4">
-              <div className="bg-white rounded-lg sm:rounded-xl border border-neutral-200 p-1.5 sm:p-2.5 shadow-xs">
-                <p className="text-[7px] sm:text-[9px] text-neutral-500">Traffic</p>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">+42%</p>
-                <div className="mt-0.5 sm:mt-1 h-0.5 sm:h-1 rounded-full bg-blue-100">
-                  <div className="h-full w-3/4 rounded-full bg-blue-600" />
-                </div>
-              </div>
-              <div className="bg-white rounded-lg sm:rounded-xl border border-neutral-200 p-1.5 sm:p-2.5 shadow-xs">
-                <p className="text-[7px] sm:text-[9px] text-neutral-500">Leads</p>
-                <p className="text-xs sm:text-sm font-bold text-emerald-600">128</p>
-                <div className="mt-0.5 sm:mt-1 h-0.5 sm:h-1 rounded-full bg-emerald-100">
-                  <div className="h-full w-2/3 rounded-full bg-emerald-500" />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg sm:rounded-xl border border-neutral-200 p-2 sm:p-3 shadow-xs flex-1">
-              <p className="text-[7px] sm:text-[10px] font-semibold text-neutral-700 mb-1.5 sm:mb-2">Active</p>
-              <div className="space-y-1.5 sm:space-y-2">
-                {[
-                  { name: "Google Search", status: "Live", color: "bg-emerald-500" },
-                  { name: "Facebook Ads", status: "Opt.", color: "bg-blue-500" },
-                  { name: "SEO Rankings", status: "+12", color: "bg-purple-500" },
-                ].map((item) => (
-                  <div key={item.name} className="flex items-center justify-between text-[7px] sm:text-[9px]">
-                    <div className="flex items-center gap-1 sm:gap-1.5">
-                      <div className={`w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full ${item.color}`} />
-                      <span className="text-neutral-700 font-medium truncate">{item.name}</span>
-                    </div>
-                    <span className="text-neutral-500 text-[6px] sm:text-[8px] whitespace-nowrap ml-1">{item.status}</span>
+            <div className="space-y-2 sm:space-y-2.5 flex-1 mb-3 sm:mb-4">
+              <motion.div 
+                className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg sm:rounded-xl border border-blue-200 p-2.5 sm:p-3.5 shadow-sm"
+                whileHover={{ y: -1 }}
+              >
+                <p className="text-[7px] sm:text-[9px] text-neutral-600 font-medium">Today's Performance</p>
+                <div className="flex items-end gap-2 mt-1.5 sm:mt-2">
+                  <div>
+                    <p className="text-sm sm:text-base font-bold text-blue-600">+42%</p>
+                    <p className="text-[6px] sm:text-[7px] text-neutral-600">Traffic Boost</p>
                   </div>
-                ))}
-              </div>
-              <div className="mt-2 sm:mt-3 flex items-end gap-0.5 h-10 sm:h-12">
-                {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm bg-blue-600/80"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
+                  <div className="flex-1 flex items-end gap-1">
+                    {[40, 60, 45, 70, 55].map((h, i) => (
+                      <motion.div
+                        key={i}
+                        className="flex-1 rounded-sm bg-blue-500 opacity-70 hover:opacity-100"
+                        style={{ height: `${(h / 70) * 20}px` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg sm:rounded-xl border border-emerald-200 p-2.5 sm:p-3.5 shadow-sm"
+                whileHover={{ y: -1 }}
+              >
+                <p className="text-[7px] sm:text-[9px] text-neutral-600 font-medium">Lead Generation</p>
+                <div className="flex items-center justify-between mt-1.5 sm:mt-2">
+                  <div>
+                    <p className="text-sm sm:text-base font-bold text-emerald-600">156</p>
+                    <p className="text-[6px] sm:text-[7px] text-neutral-600">New Leads</p>
+                  </div>
+                  <div className="text-[11px] sm:text-sm font-semibold text-emerald-600">↑ 28%</div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg sm:rounded-xl border border-purple-200 p-2.5 sm:p-3.5 shadow-sm"
+                whileHover={{ y: -1 }}
+              >
+                <p className="text-[7px] sm:text-[9px] text-neutral-600 font-medium">ROI Status</p>
+                <div className="flex items-center justify-between mt-1.5 sm:mt-2">
+                  <div>
+                    <p className="text-sm sm:text-base font-bold text-purple-600">3.2x</p>
+                    <p className="text-[6px] sm:text-[7px] text-neutral-600">Return on Ad Spend</p>
+                  </div>
+                  <div className="w-12 h-8 rounded-lg bg-white/50 flex items-center justify-center text-[8px] sm:text-[10px] font-bold text-purple-600">+18%</div>
+                </div>
+              </motion.div>
             </div>
 
-            <button className="mt-1.5 sm:mt-3 w-full bg-neutral-950 text-white rounded-lg sm:rounded-xl py-1.5 sm:py-2.5 text-[7px] sm:text-xs font-medium shadow-sm">
-              Boost Your Traffic
-            </button>
+            <motion.button 
+              className="mt-1.5 sm:mt-3 w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg sm:rounded-xl py-1.5 sm:py-2.5 text-[7px] sm:text-xs font-medium shadow-md hover:shadow-lg"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Boost Traffic →
+            </motion.button>
           </div>
 
           <div className="absolute bottom-1 sm:bottom-1.5 inset-x-0 flex justify-center z-20">
